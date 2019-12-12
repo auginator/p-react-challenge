@@ -9,5 +9,6 @@
 .ProgressBar-progress {
   height: 1rem;
   background: rgb(248, 5, 125);
-  border-radius: 0.5rem;
+	border-radius: 0.5rem;
+	transition: width 0.25s ease-in-out;
 }
