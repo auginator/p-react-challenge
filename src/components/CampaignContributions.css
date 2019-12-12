@@ -21,3 +21,15 @@
 	font-size: 0.9em;
 	color: rgb(120,120,120);
 }
+
+.ContributionInfo-avatar {
+  flex-shrink: 0;
+  background-color: rgba(0,0,0,0.1);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 50%;
+  position: relative;
+  height: 48px;
+  width: 48px;
+}

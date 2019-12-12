@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { getSession } from './modules'
 
 import CampaignNavigation from './components/CampaignNavigation'
-import CampaignItem from './components/CampaignItem'
+// import CampaignItem from './components/CampaignItem'
 import CampaignInfo from './components/CampaignInfo'
 import UserBalance from './components/UserBalance'
 
@@ -15,7 +15,7 @@ function App({ session }) {
   return (
     <div className="App">
       <div className="App-header">
-        <img src="/icons/Code.svg" width={ 48 } />
+        <img alt="Stack Showdown" src="/icons/Code.svg" width={ 48 } />
         <h1>Stack Showdown</h1>
         <div style={{flex: 1}} />
         <UserBalance {...user} />

@@ -1,5 +1,6 @@
 import sampleData from './mock_data'
-
+import { DEFAULT_DATA } from '../helpers'
+import moment from 'moment'
 const initialState = { ...sampleData }
 
 export const MERGE_SESSION = 'app/MERGE_SESSION'
@@ -53,20 +54,28 @@ export const getSelectedCampaignId = state => {
 
 export const getCampaignById = (state, campaignId) => {
 	const campaigns = getCampaigns(state)
-	
+
 	return campaigns.find(campaign => campaign.id === campaignId)
 }
 
 export const getCampaignContributions = (state, campaignId) => {
 	const contributions = getContributions(state)
-	
+
 	return contributions.reduce((array, contribution) => {
 		if (contribution.campaignId !== campaignId) {
 			return array
 		}
-		
+
 		return [...array, contribution]
-	}, [])
+	}, []).map(contribution => {
+    const user = getByUserId(state, contribution.userId)
+    contribution.user = {
+      name: [user.first_name, user.last_name].join(' '),
+      image: user.image
+    };
+
+    return contribution
+  }).sort((a, b) => moment(a.date).isBefore(b.date) ? 1 : -1);
 }
 
 export const getCampaignContributionsTotal = (state, campaignId) =>
@@ -74,3 +83,18 @@ export const getCampaignContributionsTotal = (state, campaignId) =>
 	.reduce((total, { amount }) => {
 		return (total + amount)
 	}, 0)
+
+// Users
+export const getUsers = state => {
+    return state.app.users
+}
+
+export const getByUserId = (state, userId) => {
+  const users = getUsers(state);
+  const u = users.find(user => user.id === userId)
+  if (!u) {
+    return DEFAULT_DATA('USER_INFO')
+  }
+
+  return u
+}

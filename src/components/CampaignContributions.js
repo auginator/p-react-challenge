@@ -1,20 +1,17 @@
 import './CampaignContributions.css'
 import React from 'react'
-import Numeral from 'numeral'
+// import Numeral from 'numeral'
 import Moment from 'moment'
 
 function renderContribution(contribution, index) {
   const {
-    user = {
-      name: 'Placeholder Name',
-      image: 'https://static.pinkaloo.com/static/img/profile.png'
-    },
+    user,
     amount,
     date
   } = contribution
 
-  return <div className="ContributionInfo">
-    <img className="UserImage" src={ user.image } />
+  return <div className="ContributionInfo" key={index}>
+    <div className="ContributionInfo-avatar" role="img" aria-label={`${(user.name || 'Unknown')}'s Profile Image`} style={{ backgroundImage: `url(${user.image || 'https://static.pinkaloo.com/static/img/profile.png'})` }} />
     <div className="ContributionInfo-user">
       <strong>{ user.name }</strong>
       <div>{ amount } donated</div>
