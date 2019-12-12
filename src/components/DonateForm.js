@@ -26,7 +26,7 @@ const DonateForm = ({ campaign, addContribution }) => {
 	const donateClickHandler = (event) => {
 		setError(null)
 		try {
-			addContribution(amount, campaign.id)
+			addContribution(amount, campaign.id, message)
 		} catch (error) {
 			setError(error.message)
 		}

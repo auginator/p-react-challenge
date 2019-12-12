@@ -19,6 +19,7 @@ export const app = (state = initialState, action) => {
 
 			const { contributions, session } = state
 			const { selectedCampaignId, user } = session
+			const { message } = payload
 			const amount = parseFloat(payload.amount)
 
 			// Make sure that the amount is valid before we do anything
@@ -30,10 +31,11 @@ export const app = (state = initialState, action) => {
 				amount,
 				campaignId: selectedCampaignId,
 				date: moment().format(), //"2019-08-15T03:00:00.000Z",
-				userId: user.id
+				userId: user.id,
+				message
 			})
 
-			session.user.balance = session.user.balance - payload.amount
+			session.user.balance = session.user.balance - amount
 
 			return { ...state, contributions, session }
 		}
@@ -53,10 +55,10 @@ export const selectCampaignById = campaignId => {
 	}
 }
 
-export const addContribution = (amount, campaignId) => {
+export const addContribution = (amount, campaignId, message = null) => {
 	return {
 		type: ACTION_TYPES.ADD_CONTRIBUTION,
-		payload: { amount, campaignId }
+		payload: { amount, campaignId, message }
 	}
 }
 
