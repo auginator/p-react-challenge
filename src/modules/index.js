@@ -17,14 +17,13 @@ export const app = (state = initialState, action) => {
 
 		case ACTION_TYPES.ADD_CONTRIBUTION: {
 
+			const { contributions, session } = state
+			const { selectedCampaignId, user } = session
 			const amount = parseFloat(payload.amount)
 
 			// Make sure that the amount is valid before we do anything
-			if (amount > state.session.user.balance) throw new Error(`Whoa, big spender!\nThat is more than your ${Numeral(state.session.user.balance).format('$0,0.00')} balance!`)
+			if (amount > user.balance) throw new Error(`Whoa, big spender!\nThat is more than your ${Numeral(user.balance).format('$0,0.00')} balance!`)
 			if (amount <= 0) throw new Error(`Please choose an amount greater than 0 to donate`)
-
-			const { contributions, session } = state;
-			const { selectedCampaignId, user } = session
 
 			contributions.push({
 				id: (contributions.length + 1),

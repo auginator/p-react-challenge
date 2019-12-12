@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectCampaignById, getSession, getCampaigns } from '../modules'
+import { selectCampaignById, getSession, getCampaigns, getContributions, getCampaignContributionsTotal } from '../modules'
 
 import CampaignItem from './CampaignItem'
 
@@ -34,10 +34,18 @@ function CampaignNavigation({ campaigns, selectedCampaignId, selectCampaignById 
 
 const mapStateToProps = function(state) {
 	const { selectedCampaignId } = getSession(state)
-
+	const campaigns = getCampaigns(state)
+	const contributions = getContributions(state)
+	const sortedCampaigns = campaigns.map(campaign => {
+		campaign.totalContributions = getCampaignContributionsTotal(state, campaign.id)
+		return campaign
+	}).sort((a,b) => {
+		return a.totalContributions > b.totalContributions ? -1 : a.totalContributions < b.totalContributions ? 1 : 0;
+	})
 	return {
-		campaigns: getCampaigns(state),
-		selectedCampaignId
+		campaigns: sortedCampaigns,
+		selectedCampaignId,
+		contributions
 	}
 }
 
