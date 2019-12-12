@@ -8,8 +8,8 @@ const DonateForm = ({ campaign, addContribution }) => {
 	const [error, setError] = useState(null)
 
 	const amountInputProps = {
-    className: 'Donate-amount',
-    type: 'number',
+		className: 'Donate-amount',
+		type: 'number',
 		value: amount,
 		placeholder: 'Amount',
 		onChange: ({ target: { value } }) => setAmount(value)
@@ -22,14 +22,14 @@ const DonateForm = ({ campaign, addContribution }) => {
 		onChange: ({ target: { value } }) => setMessage(value)
 	}
 
-  const donateClickHandler = (event) => {
-    setError(null)
-    try {
-      addContribution(amount, campaign.id)
-    } catch (error) {
-      setError(error.message)
-    }
-  }
+	const donateClickHandler = (event) => {
+		setError(null)
+		try {
+			addContribution(amount, campaign.id)
+		} catch (error) {
+			setError(error.message)
+		}
+	}
 
 	const buttonProps = {
 		className: 'Donate-button',
@@ -50,11 +50,11 @@ const DonateForm = ({ campaign, addContribution }) => {
 }
 
 const mapStateToProps = function (state) {
-  return {}
+	return {}
 }
 
 const mapDispatchToProps = {
-  addContribution
+	addContribution
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DonateForm)

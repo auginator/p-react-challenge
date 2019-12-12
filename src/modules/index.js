@@ -18,28 +18,28 @@ export const app = (state = initialState, action) => {
 			return { ...state, session }
 		}
 
-    case ADD_CONTRIBUTION: {
+		case ADD_CONTRIBUTION: {
 
-      const amount = parseFloat(payload.amount)
+			const amount = parseFloat(payload.amount)
 
-      // Make sure that the amount is valid before we do anything
-      if (amount > state.session.user.balance) throw new Error(`Whoa, big spender!\nThat is more than your ${Numeral(state.session.user.balance).format('$0,0.00')} balance!`)
-      if (amount <= 0) throw new Error(`Please choose an amount greater than 0 to donate`)
+			// Make sure that the amount is valid before we do anything
+			if (amount > state.session.user.balance) throw new Error(`Whoa, big spender!\nThat is more than your ${Numeral(state.session.user.balance).format('$0,0.00')} balance!`)
+			if (amount <= 0) throw new Error(`Please choose an amount greater than 0 to donate`)
 
-      const { contributions, session } = state;
-      const { selectedCampaignId, user } = session
+			const { contributions, session } = state;
+			const { selectedCampaignId, user } = session
 
-      contributions.push({
-        id: (contributions.length + 1),
-        amount,
-        campaignId: selectedCampaignId,
-        date: moment().format(), //"2019-08-15T03:00:00.000Z",
-        userId: user.id
-      })
+			contributions.push({
+				id: (contributions.length + 1),
+				amount,
+				campaignId: selectedCampaignId,
+				date: moment().format(), //"2019-08-15T03:00:00.000Z",
+				userId: user.id
+			})
 
-      session.user.balance = session.user.balance - payload.amount
+			session.user.balance = session.user.balance - payload.amount
 
-      return { ...state, contributions, session }
+			return { ...state, contributions, session }
 		}
 
 		default: {
@@ -58,10 +58,10 @@ export const selectCampaignById = campaignId => {
 }
 
 export const addContribution = (amount, campaignId) => {
-  return {
-    type: ADD_CONTRIBUTION,
-    payload: { amount, campaignId }
-  }
+	return {
+		type: ADD_CONTRIBUTION,
+		payload: { amount, campaignId }
+	}
 }
 
 //- Selectors
@@ -101,33 +101,33 @@ export const getCampaignContributions = (state, campaignId) => {
 
 		return [...array, contribution]
 	}, []).map(contribution => {
-    const user = getByUserId(state, contribution.userId)
-    contribution.user = {
-      name: [user.first_name, user.last_name].join(' '),
-      image: user.image
-    };
+		const user = getByUserId(state, contribution.userId)
+		contribution.user = {
+			name: [user.first_name, user.last_name].join(' '),
+			image: user.image
+		};
 
-    return contribution
-  }).sort((a, b) => moment(a.date).isBefore(b.date) ? 1 : -1);
+		return contribution
+	}).sort((a, b) => moment(a.date).isBefore(b.date) ? 1 : -1);
 }
 
 export const getCampaignContributionsTotal = (state, campaignId) =>
 	getCampaignContributions(state, campaignId)
-	.reduce((total, { amount }) => {
-		return (total + amount)
-	}, 0)
+		.reduce((total, { amount }) => {
+			return (total + amount)
+		}, 0)
 
 // Users
 export const getUsers = state => {
-    return state.app.users
+	return state.app.users
 }
 
 export const getByUserId = (state, userId) => {
-  const users = getUsers(state);
-  const u = users.find(user => user.id === userId)
-  if (!u) {
-    return DEFAULT_DATA('USER_INFO')
-  }
+	const users = getUsers(state);
+	const u = users.find(user => user.id === userId)
+	if (!u) {
+		return DEFAULT_DATA('USER_INFO')
+	}
 
-  return u
+	return u
 }
