@@ -27,6 +27,12 @@
   font-weight: 300;
 }
 
+@media screen and (max-width: 480px) {
+	.App-header h1 {
+		display: none;
+	}
+}
+
 /* Use a wrapper to get a more expected overflow behavior, as it is unavailable with a display: flex element */
 .Campaigns-wrapper {
   overflow-x: auto;
@@ -38,12 +44,6 @@
   flex-direction: row;
   /*background: linear-gradient(180deg, rgb(237, 205, 217), rgb(238, 179, 201));*/
   padding: 2rem 3rem;
-}
-
-.Campaigns:after {
-  content: '';
-  display: inline-block;
-  width: 3rem;
 }
 
 .Campaign {
