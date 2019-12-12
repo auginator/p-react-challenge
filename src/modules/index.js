@@ -1,24 +1,21 @@
 import sampleData from './mock_data'
-import { DEFAULT_DATA } from '../helpers'
+import { DEFAULT_DATA, ACTION_TYPES } from '../helpers'
 import moment from 'moment'
 import Numeral from 'numeral'
 const initialState = { ...sampleData }
-
-export const MERGE_SESSION = 'app/MERGE_SESSION'
-export const ADD_CONTRIBUTION = 'app/ADD_CONTRIBUTION'
 
 //- Redux
 export const app = (state = initialState, action) => {
 	const { type, payload } = action
 
 	switch (type) {
-		case MERGE_SESSION: {
+		case ACTION_TYPES.MERGE_SESSION: {
 			const session = { ...state.session, ...payload }
 
 			return { ...state, session }
 		}
 
-		case ADD_CONTRIBUTION: {
+		case ACTION_TYPES.ADD_CONTRIBUTION: {
 
 			const amount = parseFloat(payload.amount)
 
@@ -52,14 +49,14 @@ export const app = (state = initialState, action) => {
 
 export const selectCampaignById = campaignId => {
 	return {
-		type: MERGE_SESSION,
+		type: ACTION_TYPES.MERGE_SESSION,
 		payload: { selectedCampaignId: campaignId }
 	}
 }
 
 export const addContribution = (amount, campaignId) => {
 	return {
-		type: ADD_CONTRIBUTION,
+		type: ACTION_TYPES.ADD_CONTRIBUTION,
 		payload: { amount, campaignId }
 	}
 }

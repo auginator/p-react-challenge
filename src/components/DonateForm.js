@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { addContribution } from '../modules'
+import ErrorMessage from './ErrorMessage'
 
 const DonateForm = ({ campaign, addContribution }) => {
 	const [amount, setAmount] = useState('')
@@ -36,16 +37,12 @@ const DonateForm = ({ campaign, addContribution }) => {
 		onClick: donateClickHandler
 	}
 
-	const errorMessage = error && (
-		<div className="Donate-error">{ error }</div>
-	)
-
 	return <div className="CampaignInfo-donate">
 		<h2>Donate to { campaign.name }</h2>
 		<input { ...amountInputProps } />
 		<input { ...messageInputProps } />
-		{ errorMessage }
-		<button { ...buttonProps }>Donate</button>
+		<ErrorMessage error={error} />
+		<button {...buttonProps} disabled={!amount || parseFloat(amount) <=0}>Donate</button>
 	</div>
 }
 
