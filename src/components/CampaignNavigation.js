@@ -24,9 +24,11 @@ function CampaignNavigation({ campaigns, selectedCampaignId, selectCampaignById 
   }
 
   return (
-    <div className="Campaigns">
-    { campaigns.map(renderCampaignItem) }
-  </div>
+    <div className="Campaigns-wrapper">
+      <div className="Campaigns">
+      { campaigns.map(renderCampaignItem) }
+      </div>
+    </div>
   )
 }
 

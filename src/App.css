@@ -27,12 +27,22 @@
   font-weight: 300;
 }
 
+/* Use a wrapper to get a more expected overflow behavior, as it is unavailable with a display: flex element */
+.Campaigns-wrapper {
+  overflow-x: auto;
+}
+
 .Campaigns {
   display: flex;
   flex-direction: row;
   /*background: linear-gradient(180deg, rgb(237, 205, 217), rgb(238, 179, 201));*/
   padding: 2rem 3rem;
-  padding-right: 2rem;
+}
+
+.Campaigns:after {
+  content: '';
+  display: inline-block;
+  width: 3rem;
 }
 
 .Campaign {
