@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { addContribution } from '../modules'
+import ErrorMessage from './ErrorMessage'
 
-const DonateForm = ({ campaign }) => {
+const DonateForm = ({ campaign, addContribution }) => {
 	const [amount, setAmount] = useState('')
 	const [message, setMessage] = useState('')
 	const [error, setError] = useState(null)
 
 	const amountInputProps = {
 		className: 'Donate-amount',
+		type: 'number',
 		value: amount,
 		placeholder: 'Amount',
 		onChange: ({ target: { value } }) => setAmount(value)
@@ -19,24 +23,35 @@ const DonateForm = ({ campaign }) => {
 		onChange: ({ target: { value } }) => setMessage(value)
 	}
 
-	const buttonProps = {
-		className: 'Donate-button',
-		onClick: (event) => {
-			setError('Not implemented')
+	const donateClickHandler = (event) => {
+		setError(null)
+		try {
+			addContribution(amount, campaign.id, message)
+		} catch (error) {
+			setError(error.message)
 		}
 	}
 
-	const errorMessage = error && (
-		<div className="Donate-error">{ error }</div>
-	)
-	
+	const buttonProps = {
+		className: 'Donate-button',
+		onClick: donateClickHandler
+	}
+
 	return <div className="CampaignInfo-donate">
 		<h2>Donate to { campaign.name }</h2>
 		<input { ...amountInputProps } />
 		<input { ...messageInputProps } />
-		{ errorMessage }
-		<button { ...buttonProps }>Donate</button>
+		<ErrorMessage error={error} />
+		<button {...buttonProps} disabled={!amount || parseFloat(amount) <=0}>Donate</button>
 	</div>
 }
 
-export default DonateForm
+const mapStateToProps = function (state) {
+	return {}
+}
+
+const mapDispatchToProps = {
+	addContribution
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DonateForm)

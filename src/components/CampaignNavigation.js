@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectCampaignById, getSession, getCampaigns } from '../modules'
+import { selectCampaignById, getSession, getContributions } from '../modules'
+import { getCampaignsSorted } from '../selectors'
 
 import CampaignItem from './CampaignItem'
 
@@ -24,9 +25,11 @@ function CampaignNavigation({ campaigns, selectedCampaignId, selectCampaignById 
   }
 
   return (
-    <div className="Campaigns">
-    { campaigns.map(renderCampaignItem) }
-  </div>
+    <div className="Campaigns-wrapper">
+      <div className="Campaigns">
+      { campaigns.map(renderCampaignItem) }
+      </div>
+    </div>
   )
 }
 
@@ -34,8 +37,9 @@ const mapStateToProps = function(state) {
 	const { selectedCampaignId } = getSession(state)
 
 	return {
-		campaigns: getCampaigns(state),
-		selectedCampaignId
+		selectedCampaignId,
+		campaigns: getCampaignsSorted(state),
+		contributions: getContributions(state)
 	}
 }
 
