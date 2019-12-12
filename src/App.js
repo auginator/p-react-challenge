@@ -10,7 +10,6 @@ import CampaignInfo from './components/CampaignInfo'
 import UserBalance from './components/UserBalance'
 
 function App({ session }) {
-  const { user } = session
 
   return (
     <div className="App">
@@ -18,7 +17,7 @@ function App({ session }) {
         <img alt="Stack Showdown" src="/icons/Code.svg" width={ 48 } />
         <h1>Stack Showdown</h1>
         <div style={{flex: 1}} />
-        <UserBalance {...user} />
+        <UserBalance />
       </div>
       <CampaignNavigation />
       <CampaignInfo />
@@ -28,7 +27,7 @@ function App({ session }) {
 
 const mapStateToProps = function(state) {
   return {
-    session: getSession(state)
+		session: getSession(state)
   }
 }
 

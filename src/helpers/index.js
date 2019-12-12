@@ -1,4 +1,4 @@
-export const ACTIONS_TYPES = {
+export const ACTION_TYPES = {
 	MERGE_SESSION: 'app/MERGE_SESSION',
 	ADD_CONTRIBUTION: 'app/ADD_CONTRIBUTION'
 }
