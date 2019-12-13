@@ -2,9 +2,9 @@ import React from 'react'
 import Numeral from 'numeral'
 import ProgressBar from './ProgressBar'
 
-function CampaignDetails({ campaign, campaignContributionsTotal }) {
-	const progress = campaignContributionsTotal / campaign.goal; // Placeholder value
-	const totalRaised = campaignContributionsTotal // Placeholder value
+function CampaignDetails({ campaign }) {
+	const { totalRaised } = campaign
+	const progress = totalRaised / campaign.goal;
 
 	return <div className="CampaignInfo-details">
         <div className="CampaignInfo-logo">

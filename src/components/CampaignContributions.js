@@ -17,7 +17,7 @@ function renderContribution(contribution, index) {
 			<strong>{user.name}</strong>
 			<div>{Numeral(amount).format('$0,0.00')} donated</div>
 			<div className="ContributionInfo-date">{Moment(date).format('MMM DD, YYYY')}</div>
-			{!message ? '' : <div class="ContributionInfo-message">{message}</div>}
+			{!message ? '' : <div className="ContributionInfo-message">{message}</div>}
 		</div>
 	</div>
 }
