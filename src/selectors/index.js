@@ -21,3 +21,16 @@ export const getCampaignsSorted = createSelector(
 		})
 	}
 )
+
+export const getCampaignMap = createSelector(
+	[getCampaignsWithTotals],
+	(campaigns) => {
+		const campaignMap = new Map()
+
+		campaigns.forEach(campaign => {
+			campaignMap.set(campaign.id, campaign)
+		})
+
+		return campaignMap
+	}
+)
