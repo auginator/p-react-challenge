@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getSession } from '../modules'
+import { getSession } from '../selectors'
 import Numeral from 'numeral'
 import './UserBalance.css'
 

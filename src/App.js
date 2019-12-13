@@ -2,7 +2,7 @@ import './App.css'
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { getSession } from './modules'
+import { getSession } from './selectors'
 
 import CampaignNavigation from './components/CampaignNavigation'
 // import CampaignItem from './components/CampaignItem'

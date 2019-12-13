@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { selectCampaignById, getSession, getContributions } from '../modules'
-import { getCampaignsSorted } from '../selectors'
+import { selectCampaignById } from '../actions'
+import { getSession, getContributions, getCampaignsSorted } from '../selectors'
 
 import CampaignItem from './CampaignItem'
 

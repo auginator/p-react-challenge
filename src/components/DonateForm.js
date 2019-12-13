@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { addContribution } from '../modules'
+import { addContribution } from '../actions'
 import ErrorMessage from './ErrorMessage'
 
 const DonateForm = ({ campaign, addContribution }) => {

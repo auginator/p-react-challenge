@@ -2,8 +2,7 @@ import './CampaignInfo.css'
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { getSelectedCampaignId, getCampaignContributions } from '../modules'
-import { getCampaignMap } from '../selectors'
+import { getSelectedCampaignId, getCampaignContributions, getCampaignMap } from '../selectors'
 
 import DonateForm from './DonateForm'
 import Contributions from './CampaignContributions'
